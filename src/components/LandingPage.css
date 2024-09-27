@@ -1,7 +1,5 @@
 /* LandingPage.css */
 
-/* General styles */
-/* General Layout */
 body {
     margin: 0;
     padding: 0;
@@ -214,20 +212,6 @@ body {
     margin-top: 20px;
   }
   
-  /* Testimonials
-  .testimonials {
-    margin: 50px 0;
-    text-align: center;
-  }
-  
-  .testimonial {
-    margin: 20px 0;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-  } */
-  
-  
   .testimonials {
     padding: 2rem 1rem; /* Padding for the testimonials section */
     background-color: #f9f9f9; /* Light background color for contrast */
@@ -275,34 +259,7 @@ body {
       margin: 1rem; /* Margin for separation */
     }
   }
-  
-  /* Service Slider Section */
-  /* .service-slider {
-    margin: 40px 0;
-  }
-  
-  .service-slider h3 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .service-slide {
-    text-align: center;
-  }
-  
-  .service-slide img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .service-slide h4 {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    color: #333;
-  }   */
-  
+
   
   /* Service Slider Section */
   .service-slider {
