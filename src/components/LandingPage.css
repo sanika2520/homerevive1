@@ -1,0 +1,380 @@
+/* LandingPage.css */
+
+/* General styles */
+/* General Layout */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .landing-container {
+    padding: 20px;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #484d50;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px;
+    margin-right: 15px;
+  }
+  
+  .description {
+    color: #fff;
+  }
+  
+  .nav-link {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .cta-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .cta-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Service Pathways */
+  .pathways {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+  }
+  
+  .pathway {
+    flex: 1;
+    margin: 0 15px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .pathway h3 {
+    margin-bottom: 15px;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    margin-top: 15px;
+  }
+  
+  /* Service Slider Section */
+  .service-slider {
+    margin: 40px 0;
+  }
+  
+  .service-slider h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .service-slide {
+    text-align: center;
+  }
+  
+  .service-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .service-slide h4 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  /* Slick dots styling */
+  .slick-dots li button:before {
+    color: #333;
+  }
+  
+  /* How It Works Section */
+  .how-it-works {
+    margin: 50px 0;
+    text-align: center;
+    background-color: #e0e0e0; /* Darker background color */
+    padding: 40px; /* Add some padding around the content */
+    border-radius: 10px; /* Keep the rounded corners */
+    min-height: 300px; /* Ensure the container is displayed with a minimum height */
+  }
+  
+  .how-it-works .steps {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    position: relative; /* Position for line separation */
+  }
+  
+  .how-it-works .steps::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background-color: #ccc; /* Faint line color */
+  }
+  
+  .step {
+    padding: 20px;
+    flex: 1;
+    margin: 0 15px;
+    text-align: center; /* Centered content */
+  }
+  
+  .step ol {
+    text-align: left;
+  }
+  
+  
+  /* Featured Services */
+  .featured-services {
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .service-item {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Why Choose Us Section */
+  .why-choose-us {
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .benefits {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .benefit {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    margin: 0 15px;
+  }
+  
+  /* Signup Encouragement Section */
+  .signup-encouragement {
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .signup-encouragement .cta-button {
+    margin-top: 20px;
+  }
+  
+  /* Testimonials
+  .testimonials {
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .testimonial {
+    margin: 20px 0;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+  } */
+  
+  
+  .testimonials {
+    padding: 2rem 1rem; /* Padding for the testimonials section */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    text-align: center; /* Center text for better presentation */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    margin: 2rem 0; /* Margin to separate from other sections */
+  }
+  
+  .testimonials h3 {
+    font-size: 2rem; /* Larger font size for the section title */
+    margin-bottom: 1rem; /* Space below the title */
+    color: #333; /* Darker color for visibility */
+  }
+  
+  .testimonial {
+    background-color: #fff; /* White background for each testimonial */
+    padding: 1.5rem; /* Padding for the testimonial box */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 1rem 0; /* Margin to separate testimonials */
+  }
+  
+  .testimonial h4 {
+    font-size: 1.5rem; /* Slightly smaller title for testimonials */
+    margin-bottom: 0.5rem; /* Space below the title */
+    color: #2117af; /* Color for the subtitle */
+  }
+  
+  .testimonial p {
+    font-size: 1rem; /* Font size for testimonial text */
+    color: #555; /* Gray color for the text */
+    line-height: 1.5; /* Better line spacing for readability */
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .testimonials {
+      display: flex; /* Use flexbox for larger screens */
+      justify-content: space-around; /* Space out testimonials evenly */
+      flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    }
+  
+    .testimonial {
+      flex: 1 1 300px; /* Flex properties to allow resizing */
+      margin: 1rem; /* Margin for separation */
+    }
+  }
+  
+  /* Service Slider Section */
+  /* .service-slider {
+    margin: 40px 0;
+  }
+  
+  .service-slider h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .service-slide {
+    text-align: center;
+  }
+  
+  .service-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .service-slide h4 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }   */
+  
+  
+  /* Service Slider Section */
+  .service-slider {
+    margin: 40px 0;
+  }
+  
+  .service-slider h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .service-slides-container {
+    display: flex;               /* Use flexbox for layout */
+    flex-wrap: wrap;            /* Allow items to wrap */
+    justify-content: center;     /* Center the slides */
+  }
+  
+  .service-slide {
+    text-align: center;
+    margin: 20px;              /* Space around each slide */
+    flex: 1 1 calc(30% - 40px); /* Responsive width, allows 3 slides per row */
+    max-width: 350px;          /* Optional: Limit the maximum width of each slide */
+  }
+  
+  /* Adjust image styling */
+  .service-slide img {
+    width: 100%;
+    height: 200px;             /* Fixed height for all images */
+    object-fit: cover;         /* Maintain aspect ratio */
+    border-radius: 10px;       /* Rounded corners */
+    margin-bottom: 10px;       /* Space below each image */
+  }
+  
+  .service-slide h4 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  .search-bar input {
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Footer */
+  footer {
+    margin-top: 50px;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
