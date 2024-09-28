@@ -7,6 +7,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import RoleSelection from './components/RoleSelection';
 import CustomerLoginSignup from './components/CustomerLoginSignup';
 import ProviderLoginSignup from './components/ProviderLoginSignup';
+import AddData from './AddData';
+import GetData from './GetData';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="/provider-login-signup" element={<ProviderLoginSignup />} />
       </Routes>
     </Router>
+    
   );
 }
 
