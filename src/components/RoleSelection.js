@@ -1,12 +1,12 @@
 // src/components/RoleSelection.js
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const RoleSelection = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSelection = (role) => {
-    history.push(`/${role}-login-signup`);
+    navigate(`/${role}-login-signup`);
   };
 
   return (
