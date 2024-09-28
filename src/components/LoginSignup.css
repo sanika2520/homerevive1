@@ -43,7 +43,7 @@ input, select {
 button {
     padding: 0.75rem;
     margin: 0.5rem 0;
-    background-color: #4CAF50; /* Same green as the landing page CTA */
+    background-color: #323232; /* Same green as the landing page CTA */
     color: white;
     border: none;
     border-radius: 5px;
@@ -53,7 +53,7 @@ button {
 
 /* Button Hover Effect */
 button:hover {
-    background-color: #45a049; /* Darker green for hover */
+    background-color: #5a5a5a; /* Darker green for hover */
 }
 
 /* Role Selection Styles */

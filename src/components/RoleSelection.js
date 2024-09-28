@@ -1,6 +1,7 @@
 // src/components/RoleSelection.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './RoleSelection.css';
 
 const RoleSelection = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const RoleSelection = () => {
 
   return (
     <div className="form-container">
-      <h1>Select Your Role</h1>
+      <h1>Log in as?</h1>
       <button onClick={() => handleSelection('customer')}>Customer</button>
       <button onClick={() => handleSelection('provider')}>Service Provider</button>
     </div>
