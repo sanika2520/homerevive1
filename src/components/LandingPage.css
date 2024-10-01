@@ -15,7 +15,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #484d50;
+    background-color: #0B1C3E;
     color: #fff;
     padding: 10px;
   }
@@ -316,7 +316,7 @@ body {
   footer {
     margin-top: 50px;
     text-align: center;
-    background-color: #333;
+    background-color: #0B1C3E;
     color: white;
     padding: 20px;
   }
