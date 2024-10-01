@@ -1,4 +1,4 @@
-// UserDetails.js
+// src/components/UserDetails.js
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';

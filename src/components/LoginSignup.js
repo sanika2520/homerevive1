@@ -29,6 +29,8 @@ const LoginSignup = () => {
 export default LoginSignup;
 */
 
+// src/components/LoginSignup.js
+
 import React, { useState } from 'react';
 import './LoginSignup.css';
 
