@@ -1,4 +1,5 @@
 // src/components/LoginSignup.js
+/*
 import React, { useState } from 'react';
 import './LoginSignup.css';
 
@@ -23,6 +24,16 @@ const LoginSignup = () => {
       </button>
     </div>
   );
+};
+
+export default LoginSignup;
+*/
+
+import React, { useState } from 'react';
+import './LoginSignup.css';
+
+const LoginSignup = () => {
+  return null; // This component is not used anymore
 };
 
 export default LoginSignup;

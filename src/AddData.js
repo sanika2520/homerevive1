@@ -1,4 +1,3 @@
-// src/AddData.js
 import React, { useState } from 'react';
 import { db } from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
@@ -6,20 +5,23 @@ import { collection, addDoc } from 'firebase/firestore';
 const AddData = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
+
     try {
-      await addDoc(collection(db, 'users'), {
-        name,
-        email,
-      });
+      await addDoc(collection(db, 'users'), { name, email });
       console.log('Document written with ID: ', name);
-      // Reset form
       setName('');
       setEmail('');
     } catch (e) {
-      console.error('Error adding document: ', e);
+      setError('Error adding document: ' + e.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,7 +41,10 @@ const AddData = () => {
         placeholder="Email"
         required
       />
-      <button type="submit">Add User</button>
+      <button type="submit" disabled={loading}>
+        {loading ? 'Adding...' : 'Add User'}
+      </button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 };
