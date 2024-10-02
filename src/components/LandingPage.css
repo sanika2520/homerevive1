@@ -15,7 +15,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0B1C3E;
+    background-color: #0B1C3E; /*blue colour*/
     color: #fff;
     padding: 10px;
   }
