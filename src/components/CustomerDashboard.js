@@ -1,14 +1,16 @@
-
+// src/components/CustomerDashboard.js
 import React, { useState, useEffect, useRef } from 'react';
 import './CustomerDashboard.css'; 
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
+import { useHistory } from 'react-router-dom';
+
 
 const CustomerDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [services, setServices] = useState([]); 
   const [selectedServiceId, setSelectedServiceId] = useState(null); 
   const [professionals, setProfessionals] = useState([]);
-  const [showFindButton, setShowFindButton] = useState(false); // State for controlling button visibility
+  const [showFindButton, setShowFindButton] = useState(false);
   const dropdownRef = useRef(null); 
 
   useEffect(() => {
@@ -64,11 +66,10 @@ const CustomerDashboard = () => {
 
   const handleServiceClick = (serviceId) => {
     setSelectedServiceId(serviceId);
-    setShowFindButton(true); // Show the find professionals button when a service is selected
+    setShowFindButton(true);
   };
 
   const handleFindProfessionals = () => {
-    // Mock API call to fetch professionals
     const fetchedProfessionals = [
       { id: 1, name: 'John Doe', rating: '4.9' },
       { id: 2, name: 'Jane Smith', rating: '4.7' },
@@ -95,7 +96,6 @@ const CustomerDashboard = () => {
 
   return (
     <div className="customer-dashboard">
-      {/* Header */}
       <header className="header">
         <div className="logo-container">
           <img src={homeReviveLogo} alt="Home Revive Logo" className="logo large" />
@@ -109,7 +109,7 @@ const CustomerDashboard = () => {
             <span className="profile-name">My Profile</span>
           </div>
           {showDropdown && (
-            <div className="profile-dropdown" ref={dropdownRef}>
+            <div className="profile-dropdown active" ref={dropdownRef}>
               <ul>
                 <li>View Profile</li>
                 <li>Service History</li>
@@ -122,7 +122,6 @@ const CustomerDashboard = () => {
         </div>
       </header>
 
-      {/* Service Selection */}
       <div className="service-selection-buttons">
         <h2>Select a Service</h2>
         <div className="services-buttons">
@@ -139,10 +138,9 @@ const CustomerDashboard = () => {
         </div>
       </div>
 
-      {/* Subservices Display */}
       {selectedServiceId && (
         <div className="sub-services-list">
-        <h3>Available services :</h3>
+          <h3>Available services:</h3>
           {services
             .find(service => service.id === selectedServiceId)
             .subServices.map(subService => (
@@ -153,7 +151,6 @@ const CustomerDashboard = () => {
         </div>
       )}
 
-      {/* Find Professionals Button */}
       {showFindButton && (
         <div className="fixed-find-professionals">
           <button onClick={handleFindProfessionals} className="find-professionals-button">Find Professionals</button>
