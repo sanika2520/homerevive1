@@ -1,9 +1,8 @@
 // src/components/CustomerDashboard.js
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead
 import './CustomerDashboard.css'; 
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
-import { useHistory } from 'react-router-dom';
-
 
 const CustomerDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -11,7 +10,8 @@ const CustomerDashboard = () => {
   const [selectedServiceId, setSelectedServiceId] = useState(null); 
   const [professionals, setProfessionals] = useState([]);
   const [showFindButton, setShowFindButton] = useState(false);
-  const dropdownRef = useRef(null); 
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const dummyServices = [
@@ -87,6 +87,14 @@ const CustomerDashboard = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Clear user data (like tokens) here
+    // For example: localStorage.removeItem('token');
+    
+    // Redirect to the home screen
+    navigate('/'); // Use navigate instead of history.push
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -115,7 +123,7 @@ const CustomerDashboard = () => {
                 <li>Service History</li>
                 <li>My Bookings</li>
                 <li>Account Settings</li>
-                <li>Logout</li>
+                <li onClick={handleLogout}>Logout</li> {/* Added logout handler */}
               </ul>
             </div>
           )}
