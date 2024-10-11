@@ -115,6 +115,8 @@ const CustomerLoginSignup = () => {
 export default CustomerLoginSignup;
 */
 
+// src/components/CustomerLoginSignup.js
+
 import React, { useState } from 'react';
 import { auth, db } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
