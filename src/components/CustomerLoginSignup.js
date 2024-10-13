@@ -35,8 +35,8 @@ const CustomerLoginSignup = () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userId = userCredential.user.uid;
 
-        // Redirect to user details page
-        navigate(`/user/${userId}`);
+        // Redirect to Customer Home after login
+        navigate('/customer-home');
       } catch (error) {
         setError('Error logging in: ' + error.message);
       }

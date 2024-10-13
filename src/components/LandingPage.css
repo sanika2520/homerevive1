@@ -16,9 +16,19 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #0B1C3E;
-    color: #fff;
+    color: white;
     padding: 10px;
   }
+
+  .description h1 {
+    color: white; /* Ensure the title is white */
+    font-size: 3.0rem;
+}
+
+.description p {
+    color: white; /* Ensure the paragraph is also white */
+}
+
   
   .logo-container {
     display: flex;
