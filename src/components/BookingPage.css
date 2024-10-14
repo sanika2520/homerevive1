@@ -1,0 +1,103 @@
+/* src/components/BookProfessional.css */
+.booking-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Change this to match your theme */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #0B1C3E; /* Dark blue background for the header */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin: 0; /* Remove default margin for a tighter layout */
+    color: white;
+}
+
+.booking-content {
+    margin-top: 20px;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for form groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 15px;
+    background-color: #0B1C3E; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0; /* Ensure there's no margin around the button */
+}
+
+.btn:hover {
+    background-color: #333; /* Button hover color */
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    background-color: transparent; /* Make the footer transparent */
+    padding: 0; /* Remove padding */
+    color: inherit; /* Inherit color from the parent container */
+    border: none; /* Remove any border */
+}
+
+/* Ensure no margin below button's container */
+.booking-form > .form-group:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last form group */
+}
+
+/* Additional styles to remove unwanted space */
+.booking-container,
+.booking-form {
+    padding-bottom: 20px; /* Remove padding at the bottom of the container */
+    margin-bottom: 0; /* Remove margin at the bottom of the container */
+}
+
+.form-group {
+    border: none; /* Ensure there are no borders */
+}
+
+.btn:focus {
+    outline: none; /* Remove focus outline */
+}
+
+.btn {
+    padding: 15px 30px; /* Increase padding for height and width */
+    background-color: #0B1C3E; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto; /* Center the button */
+    display: block; /* Ensure button takes full width */
+    font-size: 1.2rem; /* Increase font size */
+    width: 100%; /* Optionally make the button take full width of its parent */
+}

@@ -31,11 +31,15 @@ body {
     align-items: center;
 }
 
+.logo {
+    height: 60px;
+    margin-right: 15px;
+}
+
 .logo-text {
     font-size: 2.5rem;
     font-weight: bold;
     color: white;
-    margin: 0;
 }
 
 .nav {
@@ -56,14 +60,6 @@ body {
     color: #e0e0e0;
 }
 
-.header .search-bar input {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-}
-
 .header .profile {
     display: flex;
     align-items: center;
@@ -78,7 +74,7 @@ body {
     height: 40px;
 }
 
-.header .profile-dropdown {
+.profile-dropdown {
     position: absolute;
     top: 50px;
     right: 20px;
@@ -86,28 +82,23 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    display: none;
     z-index: 1000;
 }
 
-.header .profile-dropdown.active {
-    display: block;
-}
-
-.header .profile-dropdown ul {
+.profile-dropdown ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.header .profile-dropdown li {
+.profile-dropdown li {
     padding: 8px 0;
     cursor: pointer;
     color: black;
     transition: background-color 0.3s;
 }
 
-.header .profile-dropdown li:hover {
+.profile-dropdown li:hover {
     background-color: #f4f4f4;
     border-radius: 5px;
 }
@@ -131,11 +122,11 @@ body {
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px;
+    padding: 60px;
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    height: 100px;
+    height: 170px;
     font-weight: bold;
 }
 
@@ -158,77 +149,48 @@ body {
     color: #333;
 }
 
-/* Sub-services list styling */
-.sub-services {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
+/* Sub-services Display */
+.sub-services-list {
+    margin-top: 20px; /* Space above the sub-services list */
 }
 
-.sub-services.active {
-    display: block;
-}
-
-.sub-service-item {
-    margin: 5px 0;
-    padding: 5px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.sub-service-item:hover {
-    background-color: #e0e0e0;
-}
-
-/* Find Professionals Button */
-.find-professionals {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.find-professionals-button {
-    background-color: #0B1C3E;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.find-professionals-button:hover {
-    background-color: #5a5a5a;
-}
-
-.fixed-find-professionals {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.find-professionals-button {
-    padding: 15px 40px;
-    background-color: #0B1C3E;
-    color: white;
-    border: none;
+.sub-service-card {
+    margin-bottom: 15px;
+    padding: 15px;
     border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    background-color: #f9f9f9; /* Background color for the card */
+    border: 1px solid #ddd; /* Light border */
+    transition: background-color 0.3s;
+    position: relative;
 }
 
-.find-professionals-button:hover {
-    background-color: #5a5a5a;
-    transform: scale(1.05);
+.sub-service-card:hover {
+    background-color: #e0e0e0; /* Change background on hover */
+}
+
+/* Sub-service Title */
+.sub-service-title {
+    font-size: 1.6rem; /* Increased title size */
+    font-weight: bold; /* Bold weight */
+    color: #0B1C3E; /* Dark blue color for the title */
+    margin-bottom: 5px; /* Space below the title */
+    text-transform: uppercase; /* Uppercase letters */
+    letter-spacing: 1px; /* Space between letters */
+}
+
+/* Sub-service Description */
+.sub-service-description {
+    margin-bottom: 20px; /* Space below the description */
+    font-size: 1rem; /* Regular description font size */
+    color: #666; /* Medium gray for better contrast */
+    line-height: 1.5; /* Increase line height for better readability */
+    font-style: italic; /* Italic style for the description */
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    width: 100%; /* Full width of the sub-service card */
+    margin-top: 10px; /* Space between the content and button */
 }

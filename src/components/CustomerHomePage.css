@@ -1,0 +1,140 @@
+/* src/components/CustomerHomePage.css */
+.customer-home-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.header {
+    background-color: #0B1C3E;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 15px;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin: 0 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    text-decoration: underline;
+    color: #e0e0e0;
+}
+
+.header .profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.header .profile img {
+    border-radius: 50%;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.profile-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-dropdown li {
+    padding: 8px 0;
+    cursor: pointer;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown li:hover {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+/* Main Content */
+.customer-home-content {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.customer-home-content h2 {
+    font-size: 2.5rem;
+    color: #0B1C3E;
+    margin-bottom: 40px;
+}
+
+/* Service Buttons */
+.home-service-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.service-button {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 40px 60px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    height: 120px;
+    width: 250px;
+    font-weight: bold;
+}
+
+.service-button:hover {
+    background-color: #333;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.service-button:active {
+    background-color: #e0e0e0;
+}
