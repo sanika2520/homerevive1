@@ -106,6 +106,7 @@ const ProviderLoginSignup = () => {
               <option value="electrician">Electrician</option>
               <option value="electronicRepair">Electronic Repair</option>
               <option value="carpentry">Carpentry</option>
+              <option value="acRepair">AC Repair</option>
             </select>
           </>
         )}
