@@ -97,6 +97,7 @@ const ServiceProviderDashboard = () => {
               <ul>
                 <li onClick={handleViewProfile}>View Profile</li>
                 <li>Account Settings</li>
+                <li>Edit Working Hours</li>
                 <li onClick={handleLogoutClick}>Logout</li>
               </ul>
             </div>
