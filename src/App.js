@@ -14,6 +14,7 @@ import ProviderDetails from './components/ProviderDetails';
 import CustomerHomePage from './components/CustomerHomePage';
 import CustomerDashboard from './components/CustomerDashboard';
 import BookProfessional from './components/BookProfessional';
+import ServiceProviderDashboard from './components/ServiceProviderDashboard';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/customer-home" element={<CustomerHomePage />} />
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
         <Route path="/book-professional" element={<BookProfessional />} />
+        <Route path="/serviceprovider-dashboard" element={<ServiceProviderDashboard />} />
         
       </Routes>
     </Router>

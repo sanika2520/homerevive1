@@ -116,12 +116,11 @@ export default CustomerLoginSignup;
 */
 
 // src/components/CustomerLoginSignup.js
-
 import React, { useState } from 'react';
-import { auth, db } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig'; // Adjust the import path if necessary
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './LoginSignup.css';
 
 const CustomerLoginSignup = () => {
@@ -139,7 +138,7 @@ const CustomerLoginSignup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const toggleForm = () => setIsLogin(!isLogin);
 
@@ -153,8 +152,8 @@ const CustomerLoginSignup = () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userId = userCredential.user.uid;
 
-        // Redirect to the customer dashboard after successful login
-        navigate('/customer-dashboard');
+        // Redirect to Customer Home after login
+        navigate('/customer-home');
       } catch (error) {
         setError('Error logging in: ' + error.message);
       }
@@ -176,7 +175,8 @@ const CustomerLoginSignup = () => {
           createdAt: new Date(),
         });
 
-        // Reset form and navigate to the dashboard
+        console.log('User signed up and data saved:', user.uid);
+        // Reset form
         setName('');
         setSurname('');
         setEmail('');
@@ -187,7 +187,6 @@ const CustomerLoginSignup = () => {
         setCity('');
         setPincode('');
         setState('');
-        navigate('/customer-dashboard'); // Redirect to the customer dashboard
       } catch (error) {
         setError('Error signing up: ' + error.message);
       }
