@@ -19,7 +19,7 @@ const BookProfessional = () => {
   // Function to generate time slots with 1-hour intervals
   const generateTimeOptions = () => {
     const options = [];
-    for (let hour = 0; hour <= 23; hour++) {
+    for (let hour = 8; hour <= 22; hour++) {
       const time = `${hour.toString().padStart(2, '0')}:00`;
       options.push(<option key={time} value={time}>{time}</option>);
     }

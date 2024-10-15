@@ -90,7 +90,7 @@ const LandingPage = () => {
       <section className="signup-encouragement">
         <h3>Service Providers: Join Us!</h3>
         <p>Start getting jobs now and grow your business.</p>
-        <Link to="/join" className="cta-button">Start Getting Jobs Now</Link>
+        <Link to="/provider-login-signup" className="cta-button">Start Getting Jobs Now</Link>
       </section>
 
       <section className="testimonials">
