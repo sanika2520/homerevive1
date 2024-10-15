@@ -37,7 +37,7 @@ const ProviderLoginSignup = () => {
         const userId = userCredential.user.uid;
 
         // Redirect to provider details page
-        navigate(`/provider/${userId}`);
+        navigate('/serviceprovider-dashboard');
       } catch (error) {
         setError('Error logging in: ' + error.message);
       }
