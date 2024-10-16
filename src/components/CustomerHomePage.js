@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './CustomerHomePage.css';
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import userProfile from '../assets/user-placeholder.png.webp'; // Import user profile image
 
 const CustomerHomePage = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -43,7 +44,7 @@ const CustomerHomePage = () => {
           <div className="nav-item">Home</div>
           <div className="nav-item">Support</div>
           <div className="profile" onClick={handleProfileClick}>
-            <img src="https://via.placeholder.com/40" alt="Profile" />
+            <img src={userProfile} alt="Profile" />
             <span className="profile-name">My Profile</span>
           </div>
           {showDropdown && (
@@ -70,7 +71,7 @@ const CustomerHomePage = () => {
             </button>
           </div>
           <div className="service-card">
-            <button className="service-button" onClick={handleBookServiceClick}> {/* Updated this line */}
+            <button className="service-button" onClick={handleBookServiceClick}>
               Book a Service
             </button>
           </div>
