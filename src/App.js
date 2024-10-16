@@ -15,6 +15,10 @@ import CustomerHomePage from './components/CustomerHomePage';
 import CustomerDashboard from './components/CustomerDashboard';
 import BookProfessional from './components/BookProfessional';
 import ServiceProviderDashboard from './components/ServiceProviderDashboard';
+import FAQsCustomers from './components/FAQsCustomers';
+import FAQsProviders from './components/FAQsProviders';
+import TermsOfService from './components/TermsOfService';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
   return (
@@ -32,6 +36,10 @@ function App() {
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
         <Route path="/book-professional" element={<BookProfessional />} />
         <Route path="/serviceprovider-dashboard" element={<ServiceProviderDashboard />} />
+        <Route path="/FAQsCustomers" element={<FAQsCustomers />} />
+        <Route path="/FAQsProviders" element={<FAQsProviders />} />
+        <Route path="/Terms" element={<TermsOfService />} />
+        <Route path="/Privacy" element={<PrivacyPolicy />} />
         
       </Routes>
     </Router>
