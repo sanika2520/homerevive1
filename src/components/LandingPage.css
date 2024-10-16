@@ -36,8 +36,9 @@ body {
 }
 
 .logo {
-  height: 70px;
-  margin-right: 15px;
+  height: 100px; 
+  width: auto;
+  margin-right: 5px;
 }
 
 .description {
