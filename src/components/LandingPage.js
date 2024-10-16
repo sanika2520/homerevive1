@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import './LandingPage.css';
-import homeReviveLogo from '../assets/home-revive-logo.png.webp';
+import homeReviveLogo from '../assets/home-revive-logo1.png.webp';
 
 // Importing images for services
 import plumbingImage from '../assets/plumbing.jpeg';
