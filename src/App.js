@@ -20,6 +20,7 @@ import FAQsProviders from './components/FAQsProviders';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ContactUs from './components/ContactUs';
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/Terms" element={<TermsOfService />} />
         <Route path="/Privacy" element={<PrivacyPolicy />} />
         <Route path="/Contact" element={<ContactUs />} />
+        <Route path="/About" element={<AboutUs />} />
         
       </Routes>
     </Router>

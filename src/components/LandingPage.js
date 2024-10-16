@@ -37,7 +37,7 @@ const LandingPage = () => {
         <nav>
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/contact" className="nav-link">Contact Us</Link>
-          <Link to="/join" className="nav-link">About Us</Link>
+          <Link to="/about" className="nav-link">About Us</Link>
           <Link to="/login-signup" className="nav-link">Login/Signup</Link>
         </nav>
       </header>
