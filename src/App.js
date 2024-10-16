@@ -19,6 +19,7 @@ import FAQsCustomers from './components/FAQsCustomers';
 import FAQsProviders from './components/FAQsProviders';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import ContactUs from './components/ContactUs';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/FAQsProviders" element={<FAQsProviders />} />
         <Route path="/Terms" element={<TermsOfService />} />
         <Route path="/Privacy" element={<PrivacyPolicy />} />
+        <Route path="/Contact" element={<ContactUs />} />
         
       </Routes>
     </Router>
