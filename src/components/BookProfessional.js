@@ -4,15 +4,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 import userProfile from '../assets/user-placeholder.png.webp';
 import './BookingPage.css';
+import { db, auth } from '../firebaseConfig'; 
+import { collection, getDocs, query, where, doc, getDoc,addDoc} from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth'; 
+
 
 const BookProfessional = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { selectedService } = location.state || { selectedService: { title: 'Default Service' } };
-  
-  const [bookingDate, setBookingDate] = useState('');
-  const [bookingTime, setBookingTime] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
+    const location = useLocation();
+    const { selectedService, mainService } = location.state || {
+        selectedService: { title: 'Default Sub-Service' },
+        mainService: { title: 'Default Main-Service' }
+    };
+
+    const [bookingDate, setBookingDate] = useState('');
+    const [bookingTime, setBookingTime] = useState('');
+    const [user, setUser] = useState(null);  // To hold logged-in user details
+    const [customerArea, setCustomerArea] = useState('');  // To hold customer area
+    const [showDropdown, setShowDropdown] = useState(false);
+    const navigate = useNavigate();  // To navigate after booking
+
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -62,7 +72,7 @@ const BookProfessional = () => {
       <div className="booking-container">
         <main className="booking-content">
           <h1>Book a Professional</h1>
-          <h2>Service Selected: {selectedService.title}</h2>
+          <h3>{mainService.title} - {selectedService.title}</h3>
           <form onSubmit={handleBooking} className="booking-form">
             <div className="form-group">
               <label htmlFor="date">Select Date:</label>

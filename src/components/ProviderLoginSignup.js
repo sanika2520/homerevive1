@@ -103,10 +103,10 @@ const ProviderLoginSignup = () => {
             <select value={services} onChange={(e) => setServices(e.target.value)} required>
               <option value="">Select Services</option>
               <option value="Plumbing">Plumbing</option>
-              <option value="Electrician">Electrician</option>
-              <option value="Electronic Repair">Electronic Repair</option>
+              <option value="Electrical Work">Electrician</option>
+              <option value="Electronic Repairs">Electronic Repair</option>
               <option value="Carpentry">Carpentry</option>
-              <option value="AC Repair">AC Repair</option>
+              <option value="AC Installation and Repair">AC Repair</option>
             </select>
           </>
         )}
