@@ -273,6 +273,14 @@ const CustomerDashboard = () => {
     navigate('/customer-home'); // Change to the path of your CustomerHome component
   };
 
+  const toggleProfileDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
+  const handleLogoutClick = () => {
+    navigate('/'); // Navigate to home on logout
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -297,29 +305,28 @@ const CustomerDashboard = () => {
   
   return (
     <div className="customer-dashboard">
-      {/* Header */}
       <header className="header">
         <div className="logo-container">
           <img src={homeReviveLogo} alt="Home Revive Logo" className="logo large" />
           <span className="logo-text">Home Revive</span>
         </div>
         <div className="nav">
-  <div className="nav-item" onClick={handleHomeClick}>Home</div>
-  <div className="nav-item">Support</div>
-  <div className="profile" onClick={handleProfileClick}>
-  <img src={userProfile} alt="Profile" />
-    <span className="profile-name">My Profile</span>
-  </div>
-  {showDropdown && (
-    <div className="profile-dropdown" ref={dropdownRef}>
-      <ul>
-        <li>View Profile</li>
-        <li>Account Settings</li>
-        <li onClick={handleLogout}>Logout</li> {/* Logout button */}
-      </ul>
-    </div>
-  )}
-</div>
+          <div className="nav-item" onClick={() => navigate('/')}>Home</div>
+          <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
+          <div className="profile" onClick={toggleProfileDropdown}>
+          <img src={userProfile} alt="Profile" />
+            <span className="profile-name">My Profile</span>
+          </div>
+          {showDropdown && (
+            <div className="profile-dropdown active" ref={dropdownRef}>
+              <ul>
+                <li>View Profile</li>
+                <li>Account Settings</li>
+                <li onClick={handleLogoutClick}>Logout</li>
+              </ul>
+            </div>
+          )}
+        </div>
       </header>
 
       {/* Service Selection */}
