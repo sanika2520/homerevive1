@@ -102,11 +102,11 @@ const ProviderLoginSignup = () => {
             <input type="text" value={aadhar} onChange={(e) => setAadhar(e.target.value)} placeholder="Aadhar Card Number" required />
             <select value={services} onChange={(e) => setServices(e.target.value)} required>
               <option value="">Select Services</option>
-              <option value="plumbing">Plumbing</option>
-              <option value="electrician">Electrician</option>
-              <option value="electronicRepair">Electronic Repair</option>
-              <option value="carpentry">Carpentry</option>
-              <option value="acRepair">AC Repair</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Electronic Repair">Electronic Repair</option>
+              <option value="Carpentry">Carpentry</option>
+              <option value="AC Repair">AC Repair</option>
             </select>
           </>
         )}
