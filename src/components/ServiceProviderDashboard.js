@@ -1,24 +1,81 @@
 //src/components/ServiceProviderDashboard.js
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db, auth } from '../firebaseConfig'; // Import Firebase auth and db
 import './ServiceProviderDashboard.css';
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 import userProfile from '../assets/user-placeholder.png.webp';
+import { doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore'; // Firestore imports
 
 const ServiceProviderDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const [accountHolder, setAccountHolder] = useState(null); // To store account holder details
+  const [accountHolder, setAccountHolder] = useState(null);
   const [services, setServices] = useState([]);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [professionals, setProfessionals] = useState([]);
   const [showFindButton, setShowFindButton] = useState(false);
+  const [editWorkingHours, setEditWorkingHours] = useState(false);
+  const [specificAvailability, setSpecificAvailability] = useState({});
+  const [selectedDate, setSelectedDate] = useState(''); // Track date for specific availability
+
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  const providerID = auth.currentUser ? auth.currentUser.uid : null; // Get the logged-in user's provider ID
+
+  // Default working hours (9:00 AM to 8:00 PM)
+  const defaultWorkingHours = {
+    start: '09:00',
+    end: '20:00',
+  };
+
+  // Fetch the account holder's profile details and default availability when the component mounts
   useEffect(() => {
-    // Dummy services
+    if (providerID) {
+      const fetchAccountHolderDetails = async () => {
+        try {
+          const providerDocRef = doc(db, 'providers', providerID);
+          const docSnap = await getDoc(providerDocRef);
+
+          if (docSnap.exists()) {
+            const providerData = docSnap.data();
+            setAccountHolder(providerData);
+
+            // Check if the working hours are already set, if not, set default hours
+            if (!providerData.workingHours) {
+              // Set default working hours in Firestore
+              await setDoc(providerDocRef, { workingHours: defaultWorkingHours }, { merge: true });
+              console.log("Default working hours set.");
+            }
+          } else {
+            console.error('No such document!');
+          }
+
+          // Check if the default availability already exists
+          const availabilityDocRef = doc(db, 'availability', providerID);
+          const availabilityDocSnap = await getDoc(availabilityDocRef);
+
+          if (!availabilityDocSnap.exists()) {
+            // If no availability exists, set the default working hours
+            await setDoc(availabilityDocRef, {
+              defaultAvailability: {
+                start: '09:00',
+                end: '20:00',
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching account holder details:', error);
+        }
+      };
+
+      fetchAccountHolderDetails();
+    }
+  }, [providerID]); // Run this useEffect when providerID changes
+
+  // Dummy services for testing
+  useEffect(() => {
     const dummyServices = [
       { id: 1, title: 'Earnings', subServices: [] },
       { id: 2, title: 'Past-Work', subServices: [] },
@@ -26,24 +83,10 @@ const ServiceProviderDashboard = () => {
       { id: 4, title: 'New Request', subServices: [] },
     ];
     setServices(dummyServices);
-
-    // Simulate fetching account holder's details
-    const accountHolderDetails = {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      phone: '123-456-7890',
-    };
-    setAccountHolder(accountHolderDetails);
   }, []);
 
   const toggleProfileDropdown = () => {
     setShowDropdown((prev) => !prev);
-  };
-
-  const handleOutsideClick = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setShowDropdown(false);
-    }
   };
 
   const handleJobClick = (serviceId) => {
@@ -51,12 +94,20 @@ const ServiceProviderDashboard = () => {
     setShowFindButton(true);
   };
 
-  const handleViewJobDetails = () => {
-    const fetchedProfessionals = [
-      { id: 1, name: 'John Doe', rating: '4.9' },
-      { id: 2, name: 'Jane Smith', rating: '4.7' },
-    ];
-    setProfessionals(fetchedProfessionals);
+  const handleViewJobDetails = async () => {
+    try {
+      const professionalsQuery = query(collection(db, 'providers'));
+      const querySnapshot = await getDocs(professionalsQuery);
+
+      const fetchedProfessionals = [];
+      querySnapshot.forEach((doc) => {
+        fetchedProfessionals.push(doc.data());
+      });
+
+      setProfessionals(fetchedProfessionals);
+    } catch (error) {
+      console.error('Error fetching professionals:', error);
+    }
   };
 
   const handleViewProfile = () => {
@@ -69,15 +120,44 @@ const ServiceProviderDashboard = () => {
   };
 
   const handleLogoutClick = () => {
-    navigate('/');
+    navigate('/'); // Navigate to home on logout
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, []);
+  const handleEditWorkingHoursClick = () => {
+    setEditWorkingHours(true);
+    setShowDropdown(false);
+  };
+
+  // Handle specific availability for a date
+  const handleSpecificAvailabilityChange = (field, value) => {
+    setSpecificAvailability((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSpecificAvailabilitySubmit = async () => {
+    if (!providerID) {
+      alert('Provider ID not found.');
+      return;
+    }
+
+    try {
+      // Update specific date availability
+      if (selectedDate) {
+        const specificAvailabilityRef = doc(db, 'availability', providerID, 'specificDates', selectedDate);
+        await setDoc(specificAvailabilityRef, { specificAvailability }, { merge: true });
+        alert('Specific availability updated successfully!');
+      } else {
+        alert('Please select a date.');
+      }
+
+      setEditWorkingHours(false);
+    } catch (error) {
+      console.error('Error updating specific availability:', error);
+      alert('Failed to update specific availability.');
+    }
+  };
 
   return (
     <div className="service-provider-dashboard">
@@ -98,7 +178,7 @@ const ServiceProviderDashboard = () => {
               <ul>
                 <li onClick={handleViewProfile}>View Profile</li>
                 <li>Account Settings</li>
-                <li>Edit Working Hours</li>
+                <li onClick={handleEditWorkingHoursClick}>Edit Specific Availability</li>
                 <li onClick={handleLogoutClick}>Logout</li>
               </ul>
             </div>
@@ -122,6 +202,38 @@ const ServiceProviderDashboard = () => {
         </div>
       </div>
 
+      {editWorkingHours && (
+        <div className="specific-availability-form">
+          <h3>Edit Specific Availability for a Date</h3>
+
+          {/* Date input for specific availability */}
+          <div className="specific-availability">
+            <h4>Select Date:</h4>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
+            <label>Start Time:</label>
+            <input
+              type="time"
+              value={specificAvailability.start}
+              onChange={(e) => handleSpecificAvailabilityChange('start', e.target.value)}
+            />
+            <label>End Time:</label>
+            <input
+              type="time"
+              value={specificAvailability.end}
+              onChange={(e) => handleSpecificAvailabilityChange('end', e.target.value)}
+            />
+          </div>
+
+          <button onClick={handleSpecificAvailabilitySubmit} className="submit-button">
+            Save Availability
+          </button>
+        </div>
+      )}
+
       {selectedServiceId && (
         <div className="sub-services-list">
           <h3>Available Information:</h3>
@@ -143,11 +255,10 @@ const ServiceProviderDashboard = () => {
 
       {showProfile && accountHolder && (
         <div className="profile-details">
-          <h3>Account Holder's Profile</h3>
-          <p><strong>Name:</strong> {accountHolder.name}</p>
-          <p><strong>Email:</strong> {accountHolder.email}</p>
-          <p><strong>Phone:</strong> {accountHolder.phone}</p>
-          <button onClick={handleEditProfile} className="edit-button">Edit Profile</button>
+          <h3>Account Holder Details:</h3>
+          <p>Name: {accountHolder.name}</p>
+          <p>Email: {accountHolder.email}</p>
+          <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
         </div>
       )}
     </div>
