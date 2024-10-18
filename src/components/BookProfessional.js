@@ -57,7 +57,7 @@ const BookProfessional = () => {
               {generateTimeOptions()} {/* Generate time options with 1-hour intervals */}
             </select>
           </div>
-          <button type="submit" className="btn">Confirm Booking</button>
+          <button type="submit" className="btn">Find Proffesional</button>
         </form>
       </main>
 
