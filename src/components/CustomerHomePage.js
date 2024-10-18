@@ -32,29 +32,36 @@ const CustomerHomePage = () => {
     navigate('/customer-dashboard'); // Redirect to Customer Dashboard
   };
 
+  
+  const toggleProfileDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
+  const handleLogoutClick = () => {
+    navigate('/'); // Navigate to home on logout
+  };
+
+
   return (
     <div className="customer-home-page">
-      {/* Header */}
       <header className="header">
         <div className="logo-container">
           <img src={homeReviveLogo} alt="Home Revive Logo" className="logo large" />
           <span className="logo-text">Home Revive</span>
         </div>
         <div className="nav">
-          <div className="nav-item">Home</div>
-          <div className="nav-item">Support</div>
-          <div className="profile" onClick={handleProfileClick}>
-            <img src={userProfile} alt="Profile" />
+          <div className="nav-item" onClick={() => navigate('/customer-home')}>Home</div>
+          <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
+          <div className="profile" onClick={toggleProfileDropdown}>
+          <img src={userProfile} alt="Profile" />
             <span className="profile-name">My Profile</span>
           </div>
           {showDropdown && (
-            <div className="profile-dropdown" ref={dropdownRef}>
+            <div className="profile-dropdown active" ref={dropdownRef}>
               <ul>
                 <li>View Profile</li>
-                <li>Service History</li>
-                <li>My Bookings</li>
                 <li>Account Settings</li>
-                <li>Logout</li>
+                <li onClick={handleLogoutClick}>Logout</li>
               </ul>
             </div>
           )}
