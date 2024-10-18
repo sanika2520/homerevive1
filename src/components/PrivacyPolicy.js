@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
           <Link to="/fAQSCustomers">FAQs for Customers</Link>
           <Link to="/FAQsProviders">FAQs for Providers</Link>
           <Link to="/Terms">Terms of Service</Link>
-          {/* <Link to="/Privacy">Privacy Policy</Link> */}
+          <Link to="/Privacy">Privacy Policy</Link> 
         </div>
       </footer>
     </div>

@@ -45,7 +45,7 @@ const TermsOfService = () => {
         <div className="footer-links">
           <Link to="/fAQSCustomers">FAQs for Customers</Link>
           <Link to="/FAQsProviders">FAQs for Providers</Link>
-          {/* <Link to="/Terms">Terms of Service</Link> */}
+          <Link to="/Terms">Terms of Service</Link> 
           <Link to="/Privacy">Privacy Policy</Link>
         </div>
       </footer>
