@@ -184,6 +184,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth and signOut function
 import './CustomerDashboard.css'; 
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
+import userProfile from '../assets/user-placeholder.png.webp';
 
 const CustomerDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -306,7 +307,7 @@ const CustomerDashboard = () => {
   <div className="nav-item" onClick={handleHomeClick}>Home</div>
   <div className="nav-item">Support</div>
   <div className="profile" onClick={handleProfileClick}>
-    <img src="https://via.placeholder.com/40" alt="Profile" />
+  <img src={userProfile} alt="Profile" />
     <span className="profile-name">My Profile</span>
   </div>
   {showDropdown && (

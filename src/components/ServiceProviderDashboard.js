@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ServiceProviderDashboard.css';
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
+import userProfile from '../assets/user-placeholder.png.webp';
 
 const ServiceProviderDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -89,7 +90,7 @@ const ServiceProviderDashboard = () => {
           <div className="nav-item" onClick={() => navigate('/')}>Home</div>
           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
           <div className="profile" onClick={toggleProfileDropdown}>
-            <img src="https://via.placeholder.com/40" alt="Profile" />
+          <img src={userProfile} alt="Profile" />
             <span className="profile-name">My Profile</span>
           </div>
           {showDropdown && (
