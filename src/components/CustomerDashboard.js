@@ -268,6 +268,10 @@ const CustomerDashboard = () => {
     }
   };
 
+  const handleHomeClick = () => {
+    navigate('/customer-home'); // Change to the path of your CustomerHome component
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -299,22 +303,22 @@ const CustomerDashboard = () => {
           <span className="logo-text">Home Revive</span>
         </div>
         <div className="nav">
-          <div className="nav-item">Home</div>
-          <div className="nav-item">Support</div>
-          <div className="profile" onClick={handleProfileClick}>
-            <img src="https://via.placeholder.com/40" alt="Profile" />
-            <span className="profile-name">My Profile</span>
-          </div>
-          {showDropdown && (
-            <div className="profile-dropdown" ref={dropdownRef}>
-              <ul>
-                <li>View Profile</li>
-                <li>Account Settings</li>
-                <li onClick={handleLogout}>Logout</li> {/* Logout button */}
-              </ul>
-            </div>
-          )}
-        </div>
+  <div className="nav-item" onClick={handleHomeClick}>Home</div>
+  <div className="nav-item">Support</div>
+  <div className="profile" onClick={handleProfileClick}>
+    <img src="https://via.placeholder.com/40" alt="Profile" />
+    <span className="profile-name">My Profile</span>
+  </div>
+  {showDropdown && (
+    <div className="profile-dropdown" ref={dropdownRef}>
+      <ul>
+        <li>View Profile</li>
+        <li>Account Settings</li>
+        <li onClick={handleLogout}>Logout</li> {/* Logout button */}
+      </ul>
+    </div>
+  )}
+</div>
       </header>
 
       {/* Service Selection */}
