@@ -112,8 +112,8 @@ const LandingPage = () => {
 
       <footer>
         <div className="footer-links">
-          <Link to="/faqs/customers">FAQs for Customers</Link>
-          <Link to="/faqs/providers">FAQs for Providers</Link>
+          <Link to="/FAQsCustomers">FAQs for Customers</Link>
+          <Link to="/FAQsProviders">FAQs for Providers</Link>
           <Link to="/terms">Terms of Service</Link>
           <Link to="/privacy">Privacy Policy</Link>
         </div>
