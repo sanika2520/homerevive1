@@ -11,6 +11,7 @@ import plumbingImage from '../assets/plumbing.jpeg';
 import electricianImage from '../assets/electrician.jpeg';
 import electronicImage from '../assets/electronic.webp';
 import carpentryImage from '../assets/carpentry.jpg';
+import acrepairImage from '../assets/acrepair.jpg';
 
 const LandingPage = () => {
   // Slider settings
@@ -60,6 +61,10 @@ const LandingPage = () => {
           </div>
           <div className="service-slide">
             <img src={electronicImage} alt="Electronics Repair Service" className="service-image" />
+            <h4>Electronics Repair</h4>
+          </div>
+          <div className="service-slide">
+            <img src={acrepairImage} alt="AC Repair & Installation Service" className="service-image" />
             <h4>Electronics Repair</h4>
           </div>
         </Slider>
