@@ -65,7 +65,7 @@ const LandingPage = () => {
           </div>
           <div className="service-slide">
             <img src={acrepairImage} alt="AC Repair & Installation Service" className="service-image" />
-            <h4>Electronics Repair</h4>
+            <h4>AC Repair & Installation</h4>
           </div>
         </Slider>
       </section>
