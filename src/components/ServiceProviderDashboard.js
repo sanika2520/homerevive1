@@ -167,7 +167,7 @@ const ServiceProviderDashboard = () => {
           <span className="logo-text">Home Revive</span>
         </div>
         <div className="nav">
-          <div className="nav-item" onClick={() => navigate('/')}>Home</div>
+          <div className="nav-item" onClick={() => navigate('/serviceprovider-dashboard')}>Home</div>
           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
           <div className="profile" onClick={toggleProfileDropdown}>
           <img src={userProfile} alt="Profile" />
