@@ -14,6 +14,7 @@ import ProviderDetails from './components/ProviderDetails';
 import CustomerHomePage from './components/CustomerHomePage';
 import CustomerDashboard from './components/CustomerDashboard';
 import BookProfessional from './components/BookProfessional';
+import ProvidersList from './components/ProvidersList'; // Import the new component
 import ServiceProviderDashboard from './components/ServiceProviderDashboard';
 import FAQsCustomers from './components/FAQsCustomers';
 import FAQsProviders from './components/FAQsProviders';
@@ -30,13 +31,14 @@ function App() {
         <Route path="/login-signup" element={<RoleSelection />} />
         <Route path="/customer-login-signup" element={<CustomerLoginSignup />} />
         <Route path="/provider-login-signup" element={<ProviderLoginSignup />} />
-        <Route path="/user/:userId" element={<UserDetails />} /> {/* User Details Route */}
-        <Route path="/provider/:providerId" element={<ProviderDetails />} /> {/* Provider Details Route */}
+        <Route path="/user/:userId" element={<UserDetails />} />
+        <Route path="/provider/:providerId" element={<ProviderDetails />} />
         <Route path="/add-data" element={<AddData />} />
         <Route path="/get-data" element={<GetData />} />
         <Route path="/customer-home" element={<CustomerHomePage />} />
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
         <Route path="/book-professional" element={<BookProfessional />} />
+        <Route path="/providers-list" element={<ProvidersList />} /> {/* New route for ProvidersList */}
         <Route path="/serviceprovider-dashboard" element={<ServiceProviderDashboard />} />
         <Route path="/FAQsCustomers" element={<FAQsCustomers />} />
         <Route path="/FAQsProviders" element={<FAQsProviders />} />
@@ -44,10 +46,10 @@ function App() {
         <Route path="/Privacy" element={<PrivacyPolicy />} />
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="/About" element={<AboutUs />} />
-        
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
