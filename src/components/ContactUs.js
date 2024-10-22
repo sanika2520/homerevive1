@@ -114,7 +114,7 @@ const ContactUs = () => {
           <Link to="/FAQSCustomers">FAQs for Customers</Link>
           <Link to="/FAQSProviders">FAQs for Providers</Link>
           <Link to="/Terms">Terms of Service</Link>
-          <Link to="/PrivacyPolicy">Privacy Policy</Link>
+          <Link to="/Privacy">Privacy Policy</Link>
         </div>
       </footer>
     </div>
