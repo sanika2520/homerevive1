@@ -22,6 +22,7 @@ import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ContactUs from './components/ContactUs';
 import AboutUs from './components/AboutUs';
+import BookingSummary from './components/BookingSummary';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/Privacy" element={<PrivacyPolicy />} />
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="/About" element={<AboutUs />} />
+        <Route path="/booking-summary" element={<BookingSummary />} />
       </Routes>
     </Router>
   );
