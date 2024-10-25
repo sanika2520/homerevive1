@@ -14,7 +14,7 @@ import ProviderDetails from './components/providerDetails';
 import CustomerHomePage from './components/CustomerHomePage';
 import CustomerDashboard from './components/CustomerDashboard';
 import BookProfessional from './components/BookProfessional';
-import ProvidersList from './components/ProvidersList'; // Import the new component
+import AvailableProviders from './components/AvailableProviders';
 import ServiceProviderDashboard from './components/ServiceProviderDashboard';
 import FAQsCustomers from './components/FAQsCustomers';
 import FAQsProviders from './components/FAQsProviders';
@@ -39,7 +39,7 @@ function App() {
         <Route path="/customer-home" element={<CustomerHomePage />} />
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
         <Route path="/book-professional" element={<BookProfessional />} />
-        <Route path="/providers-list" element={<ProvidersList />} /> {/* New route for ProvidersList */}
+        <Route path="/available-providers" element={<AvailableProviders />} />
         <Route path="/serviceprovider-dashboard" element={<ServiceProviderDashboard />} />
         <Route path="/FAQsCustomers" element={<FAQsCustomers />} />
         <Route path="/FAQsProviders" element={<FAQsProviders />} />

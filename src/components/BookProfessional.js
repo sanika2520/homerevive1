@@ -146,12 +146,12 @@ const BookProfessional = () => {
 
     const handleBooking = (e) => {
         e.preventDefault();
-        console.log(`Booked ${selectedService.title} on ${bookingDate} at ${bookingTime}`);
-
-        // Navigate to a new page with the UID and pincode
-        navigate('/booking-summary', { state: { userUid, pincode } });
+        console.log(`Finding professionals in pincode ${pincode}`);
+    
+        // Navigate to AvailableProviders component, passing the pincode as state
+        navigate('/available-providers', { state: { pincode } });
     };
-
+    
     const generateTimeOptions = () => {
         const options = [];
         for (let hour = 8; hour <= 22; hour++) {
