@@ -219,7 +219,7 @@ const CustomerHomePage = () => {
       const fetchUserData = async () => {
         const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
         if (docSnap.exists()) {
-          setUserData({ uid: currentUser.uid, area: docSnap.data().area });
+          setUserData({ uid: currentUser.uid,pincode: docSnap.data().pincode });
         } else {
           console.log('No user data found for this UID.');
         }
@@ -286,7 +286,7 @@ const CustomerHomePage = () => {
         {userData && (
           <div>
             <p>Your UID: {userData.uid}</p>
-            <p>Your Area: {userData.area}</p>
+            <p>Your Pincode: {userData.pincode}</p>
           </div>
         )}
         <div className="home-service-buttons">

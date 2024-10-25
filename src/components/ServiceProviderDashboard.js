@@ -439,7 +439,7 @@ const ServiceProviderDashboard = () => {
       </header>
 
       <div className="service-selection-buttons">
-        <h2>Your Jobs {providerID && ` (User ID: ${providerID}, Area: ${accountHolder?.area || 'N/A'})`}</h2>
+        <h2>Your Jobs {providerID && ` (User ID: ${providerID}, Pincode: ${accountHolder?.pincode || 'N/A'})`}</h2>
         <div className="services-buttons">
           {services.map((service) => (
             <div key={service.id} className="service-card">
@@ -505,7 +505,7 @@ const ServiceProviderDashboard = () => {
           <h3>Account Holder Details:</h3>
           <p>Name: {accountHolder.name}</p>
           <p>Email: {accountHolder.email}</p>
-          <p>Area: {accountHolder.area || 'N/A'}</p>
+          <p>Pincode: {accountHolder.pincode || 'N/A'}</p>
           <button>Edit Profile</button>
         </div>
       )}
