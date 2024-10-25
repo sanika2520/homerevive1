@@ -220,6 +220,9 @@ const CustomerHomePage = () => {
         const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
         if (docSnap.exists()) {
           setUserData({ uid: currentUser.uid,pincode: docSnap.data().pincode });
+
+          setUserData({ uid: currentUser.uid, pincode: docSnap.data().pincode });
+
         } else {
           console.log('No user data found for this UID.');
         }
