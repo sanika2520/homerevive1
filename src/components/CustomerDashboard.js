@@ -1,26 +1,27 @@
-// src/components/CustomerDashboard.js
 
 // import React, { useState, useEffect, useRef } from 'react';
-// import { useNavigate } from 'react-router-dom'; // Import useNavigate
+// import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate
 // import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth and signOut function
 // import './CustomerDashboard.css'; 
 // import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 // import userProfile from '../assets/user-placeholder.png.webp';
+// import { db } from '../firebaseConfig';
+// import { collection, addDoc } from 'firebase/firestore';
 
 // const CustomerDashboard = () => {
 //   const [showDropdown, setShowDropdown] = useState(false);
 //   const [services, setServices] = useState([]); 
 //   const [selectedServiceId, setSelectedServiceId] = useState(null); 
-//   const [professionals, setProfessionals] = useState([]); 
 //   const dropdownRef = useRef(null); 
-
 //   const navigate = useNavigate(); // Initialize useNavigate for navigation
+//   const auth = getAuth(); // Get auth instance
 
 //   useEffect(() => {
 //     const dummyServices = [
+//       // ... (Your existing services array)
 //       {
 //         id: 1,
-//         title: 'Plumbing Service',
+//         title: 'Plumbing',
 //         subServices: [
 //           { id: 1, title: 'Tap Repair', description: 'Fix leaking or damaged taps.', price: '₹500' },
 //           { id: 2, title: 'Tap Installation/Replacement', description: 'Install or replace new taps.', price: '₹700' },
@@ -91,7 +92,7 @@
 //   };
 
 //   const handleHomeClick = () => {
-//     navigate('/customer-home'); // Change to the path of your CustomerHome component
+//     navigate('/customer-home'); 
 //   };
 
 //   const toggleProfileDropdown = () => {
@@ -99,7 +100,7 @@
 //   };
 
 //   const handleLogoutClick = () => {
-//     navigate('/'); // Navigate to home on logout
+//     navigate('/'); 
 //   };
 
 //   useEffect(() => {
@@ -109,15 +110,36 @@
 //     };
 //   }, []);
 
-//   const handleBookProfessional = (subService) => {
-//     navigate('/book-professional', { state: { selectedService: subService } }); // Pass the sub-service data via the 'state'
+//   const handleBookProfessional = async (subService) => {
+//     try {
+//       const bookingData = {
+//         serviceId: selectedServiceId,
+//         subServiceId: subService.id,
+//         serviceTitle: services.find(service => service.id === selectedServiceId).title,
+//         subServiceTitle: subService.title,
+//         timestamp: new Date(),
+//       };
+
+//       await addDoc(collection(db, 'bookings'), bookingData);
+//       console.log("Booking successful!", bookingData);
+
+//       // Pass customer UID to the Book Professional page
+//       navigate('/book-professional', {
+//         state: {
+//           selectedService: subService,
+//           mainService: { title: bookingData.serviceTitle },
+//           customerUid: auth.currentUser.uid, // Add customer UID here
+//         }
+//       });
+//     } catch (error) {
+//       console.error("Error adding booking: ", error);
+//     }
 //   };
 
 //   const handleLogout = () => {
-//     const auth = getAuth();
 //     signOut(auth)
 //       .then(() => {
-//         navigate('/'); // Redirect to LandingPage after successful logout
+//         navigate('/'); 
 //       })
 //       .catch((error) => {
 //         console.error("Error logging out: ", error);
@@ -135,7 +157,7 @@
 //           <div className="nav-item" onClick={() => navigate('/customer-home')}>Home</div>
 //           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
 //           <div className="profile" onClick={toggleProfileDropdown}>
-//           <img src={userProfile} alt="Profile" />
+//             <img src={userProfile} alt="Profile" />
 //             <span className="profile-name">My Profile</span>
 //           </div>
 //           {showDropdown && (
@@ -178,32 +200,40 @@
 //                 <div className="sub-service-info">
 //                   <h4>{subService.title}</h4>
 //                   <p>{subService.description}</p>
-//                   <p className="price">Price: {subService.price}</p> {/* Display the price */}
+//                   <p className="price">Price: {subService.price}</p>
 //                 </div>
-//                 {/* Container for the button to align it properly */}
 //                 <div className="button-container">
-//                 <button 
-//                 className="book-professional-button" 
-//                 onClick={() => handleBookProfessional(subService)} // Pass sub-service object
-//                 >
-//                 Book Professional
-//                 </button>
-
+//                   <button 
+//                     className="book-professional-button" 
+//                     onClick={() => handleBookProfessional(subService)}
+//                   >
+//                     Book Professional
+//                   </button>
 //                 </div>
 //               </div>
 //             ))}
 //         </div>
 //       )}
+
+//       <footer className="footer">
+//         <div className="footer-links">
+//           <Link to="/FAQsCustomers">FAQs for Customers</Link>
+//           <Link to="/FAQsProviders">FAQs for Providers</Link>
+//           <Link to="/terms">Terms of Service</Link>
+//           <Link to="/privacy">Privacy Policy</Link>
+//         </div>
+//       </footer>
 //     </div>
 //   );
 // };
 
 // export default CustomerDashboard;
 
+
 // src/components/CustomerDashboard.js
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth and signOut function
 import './CustomerDashboard.css'; 
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
@@ -419,6 +449,15 @@ const CustomerDashboard = () => {
             ))}
         </div>
       )}
+
+<footer className="footer">
+            <div className="footer-links">
+                <Link to="/FAQsCustomers">FAQs for Customers</Link>
+                <Link to="/FAQsProviders">FAQs for Providers</Link>
+                <Link to="/terms">Terms of Service</Link>
+                <Link to="/privacy">Privacy Policy</Link>
+            </div>
+            </footer>
     </div>
   );
 };
