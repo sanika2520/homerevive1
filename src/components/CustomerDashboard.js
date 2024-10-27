@@ -1,24 +1,23 @@
-
 // import React, { useState, useEffect, useRef } from 'react';
 // import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate
 // import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth and signOut function
 // import './CustomerDashboard.css'; 
 // import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 // import userProfile from '../assets/user-placeholder.png.webp';
-// import { db } from '../firebaseConfig';
-// import { collection, addDoc } from 'firebase/firestore';
+// import {db} from '../firebaseConfig';
+// import {collection, addDoc} from 'firebase/firestore';
 
 // const CustomerDashboard = () => {
 //   const [showDropdown, setShowDropdown] = useState(false);
 //   const [services, setServices] = useState([]); 
 //   const [selectedServiceId, setSelectedServiceId] = useState(null); 
+//   const [professionals, setProfessionals] = useState([]); 
 //   const dropdownRef = useRef(null); 
+
 //   const navigate = useNavigate(); // Initialize useNavigate for navigation
-//   const auth = getAuth(); // Get auth instance
 
 //   useEffect(() => {
 //     const dummyServices = [
-//       // ... (Your existing services array)
 //       {
 //         id: 1,
 //         title: 'Plumbing',
@@ -92,7 +91,7 @@
 //   };
 
 //   const handleHomeClick = () => {
-//     navigate('/customer-home'); 
+//     navigate('/customer-home'); // Change to the path of your CustomerHome component
 //   };
 
 //   const toggleProfileDropdown = () => {
@@ -100,7 +99,7 @@
 //   };
 
 //   const handleLogoutClick = () => {
-//     navigate('/'); 
+//     navigate('/'); // Navigate to home on logout
 //   };
 
 //   useEffect(() => {
@@ -123,12 +122,10 @@
 //       await addDoc(collection(db, 'bookings'), bookingData);
 //       console.log("Booking successful!", bookingData);
 
-//       // Pass customer UID to the Book Professional page
 //       navigate('/book-professional', {
 //         state: {
 //           selectedService: subService,
 //           mainService: { title: bookingData.serviceTitle },
-//           customerUid: auth.currentUser.uid, // Add customer UID here
 //         }
 //       });
 //     } catch (error) {
@@ -136,10 +133,12 @@
 //     }
 //   };
 
+
 //   const handleLogout = () => {
+//     const auth = getAuth();
 //     signOut(auth)
 //       .then(() => {
-//         navigate('/'); 
+//         navigate('/'); // Redirect to LandingPage after successful logout
 //       })
 //       .catch((error) => {
 //         console.error("Error logging out: ", error);
@@ -157,7 +156,7 @@
 //           <div className="nav-item" onClick={() => navigate('/customer-home')}>Home</div>
 //           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
 //           <div className="profile" onClick={toggleProfileDropdown}>
-//             <img src={userProfile} alt="Profile" />
+//           <img src={userProfile} alt="Profile" />
 //             <span className="profile-name">My Profile</span>
 //           </div>
 //           {showDropdown && (
@@ -200,29 +199,31 @@
 //                 <div className="sub-service-info">
 //                   <h4>{subService.title}</h4>
 //                   <p>{subService.description}</p>
-//                   <p className="price">Price: {subService.price}</p>
+//                   <p className="price">Price: {subService.price}</p> {/* Display the price */}
 //                 </div>
+//                 {/* Container for the button to align it properly */}
 //                 <div className="button-container">
-//                   <button 
-//                     className="book-professional-button" 
-//                     onClick={() => handleBookProfessional(subService)}
-//                   >
-//                     Book Professional
-//                   </button>
+//                 <button 
+//                 className="book-professional-button" 
+//                 onClick={() => handleBookProfessional(subService)} // Pass sub-service object
+//                 >
+//                 Book Professional
+//                 </button>
+
 //                 </div>
 //               </div>
 //             ))}
 //         </div>
 //       )}
 
-//       <footer className="footer">
-//         <div className="footer-links">
-//           <Link to="/FAQsCustomers">FAQs for Customers</Link>
-//           <Link to="/FAQsProviders">FAQs for Providers</Link>
-//           <Link to="/terms">Terms of Service</Link>
-//           <Link to="/privacy">Privacy Policy</Link>
-//         </div>
-//       </footer>
+// <footer className="footer">
+//             <div className="footer-links">
+//                 <Link to="/FAQsCustomers">FAQs for Customers</Link>
+//                 <Link to="/FAQsProviders">FAQs for Providers</Link>
+//                 <Link to="/terms">Terms of Service</Link>
+//                 <Link to="/privacy">Privacy Policy</Link>
+//             </div>
+//             </footer>
 //     </div>
 //   );
 // };
@@ -247,6 +248,7 @@ const CustomerDashboard = () => {
   const [selectedServiceId, setSelectedServiceId] = useState(null); 
   const [professionals, setProfessionals] = useState([]); 
   const dropdownRef = useRef(null); 
+  
 
   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
@@ -441,7 +443,7 @@ const CustomerDashboard = () => {
                 className="book-professional-button" 
                 onClick={() => handleBookProfessional(subService)} // Pass sub-service object
                 >
-                Book Professional
+                Find Professional
                 </button>
 
                 </div>

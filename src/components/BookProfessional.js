@@ -1,3 +1,4 @@
+
 // import React, { useState, useEffect } from 'react';
 // import { useLocation, useNavigate } from 'react-router-dom';
 // import { auth, db } from '../firebaseConfig'; 
@@ -9,22 +10,21 @@
 
 // const BookProfessional = () => {
 //     const location = useLocation();
-//     const { selectedService, mainService } = location.state || {
+//     const { selectedService, mainService, customerId } = location.state || {
 //         selectedService: { title: 'Default Sub-Service' },
-//         mainService: { title: 'Default Main-Service' }
+//         mainService: { title: 'Default Main-Service' },
+//         customerId: 'DefaultCustomerId' // Default in case not passed
 //     };
 
 //     const [bookingDate, setBookingDate] = useState('');
 //     const [bookingTime, setBookingTime] = useState('');
-//     const [pincode, setPincode] = useState(''); // New state for pincode
-//     const [userUid, setUserUid] = useState(''); // New state for user UID
+//     const [pincode, setPincode] = useState(''); 
+//     const [userUid, setUserUid] = useState('');
 //     const [showDropdown, setShowDropdown] = useState(false);
-//     const [professionals, setProfessionals] = useState([]);
 
 //     const navigate = useNavigate();
 
 //     useEffect(() => {
-//         // Get current user UID
 //         const unsubscribe = auth.onAuthStateChanged((user) => {
 //             if (user) {
 //                 setUserUid(user.uid);
@@ -36,34 +36,63 @@
 
 //     const handleBooking = async (e) => {
 //         e.preventDefault();
+//         console.log("Booking form submitted");
+//         console.log("Selected service:", mainService.title);
+//         console.log("Entered pincode:", pincode);
+
 //         try {
+//             // Fetch professionals based on the service and pincode
 //             const professionalsRef = collection(db, 'providers');
 //             const q = query(
 //                 professionalsRef,
-//                 where('service', '==', mainService.title), // Match the service title
-//                 where('pincode', '==', pincode) // Add pincode filter
+//                 where('services', '==', mainService.title),
+//                 where('pincode', '==', pincode)
 //             );
+
 //             const querySnapshot = await getDocs(q);
 //             const fetchedProfessionals = querySnapshot.docs.map(doc => ({
 //                 id: doc.id,
 //                 ...doc.data()
 //             }));
 
-//             if (fetchedProfessionals.length === 0) {
-//                 alert('No providers found for the entered pincode and selected service.');
-//             } else {
-//                 setProfessionals(fetchedProfessionals);
-//                 navigate('/available-providers', { state: { pincode, service: mainService.title } }); // Ensure service is passed
-//             }
+//             console.log("Fetched professionals:", fetchedProfessionals);
+
+//             // Create the booking data
+//             const bookingData = {
+//                 customerId, // Customer ID from state
+//                 serviceId: selectedService.id, // Assuming you have an ID for the sub-service
+//                 subServiceId: selectedService.id,
+//                 serviceTitle: mainService.title,
+//                 subServiceTitle: selectedService.title,
+//                 date: bookingDate,
+//                 time: bookingTime,
+//                 pincode: pincode,
+//                 timestamp: new Date(), // Timestamp for the booking
+//             };
+
+//             // Add the booking to the Firestore collection
+//             await addDoc(collection(db, 'bookings'), bookingData);
+//             console.log("Booking successful!", bookingData);
+
+//             // Navigate to the available providers
+//             navigate('/available-providers', { 
+//                 state: { 
+//                     pincode, 
+//                     service: mainService.title, 
+//                     providers: fetchedProfessionals // Pass the providers array
+//                 } 
+//             });
+//             console.log("Navigating to available providers");
+
 //         } catch (error) {
 //             console.error("Error fetching professionals: ", error);
 //         }
 //     };
-    
+
 //     const generateTimeOptions = () => {
 //         const options = [];
 //         for (let hour = 8; hour <= 22; hour++) {
-//             const time = `${hour.toString().padStart(2, '0')}:00`;
+            // const time = `${hour.toString().padStart(2, '0')}:00`;
 //             options.push(<option key={time} value={time}>{time}</option>);
 //         }
 //         return options;
@@ -71,7 +100,7 @@
 
 //     const toggleProfileDropdown = () => setShowDropdown((prev) => !prev);
 //     const handleLogoutClick = () => {
-//         navigate('/'); // Navigate to home on logout
+//         navigate('/'); 
 //     };
 
 //     return (
@@ -105,7 +134,6 @@
 //                     <h1>Book a Professional</h1>
 //                     <h3>{mainService.title} - {selectedService.title}</h3>
                     
-//                     {/* Display service name and pincode */}
 //                     <div className="info-display">
 //                         <p><strong>Service:</strong> {mainService.title}</p>
 //                         <p><strong>Pincode:</strong> {pincode}</p>
@@ -184,7 +212,6 @@ const BookProfessional = () => {
     const [pincode, setPincode] = useState(''); 
     const [userUid, setUserUid] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [professionals, setProfessionals] = useState([]);
 
     const navigate = useNavigate();
 
@@ -200,7 +227,7 @@ const BookProfessional = () => {
 
     const handleBooking = async (e) => {
         e.preventDefault();
-        console.log("Booking form submitted"); // Debugging log
+        console.log("Booking form submitted");
         console.log("Selected service:", mainService.title);
         console.log("Entered pincode:", pincode);
 
@@ -218,15 +245,18 @@ const BookProfessional = () => {
                 ...doc.data()
             }));
 
-            console.log("Fetched professionals:", fetchedProfessionals); // Debugging log
+            console.log("Fetched professionals:", fetchedProfessionals);
 
-            if (fetchedProfessionals.length === 0) {
-                alert('No providers found for the entered pincode and selected service.');
-            } else {
-                setProfessionals(fetchedProfessionals);
-                navigate('/available-providers', { state: { pincode, service: mainService.title } });
-                console.log("Navigating to available providers"); // Debugging log
-            }
+            // Navigate regardless of the results
+            navigate('/available-providers', { 
+                state: { 
+                    pincode, 
+                    service: mainService.title, 
+                    providers: fetchedProfessionals // Pass the providers array
+                } 
+            });
+            console.log("Navigating to available providers");
+
         } catch (error) {
             console.error("Error fetching professionals: ", error);
         }
@@ -235,7 +265,7 @@ const BookProfessional = () => {
     const generateTimeOptions = () => {
         const options = [];
         for (let hour = 8; hour <= 22; hour++) {
-            const time = `${hour.toString().padStart(2, '0')}:00`;
+         const time = `${hour.toString().padStart(2, '0')}:00`;
             options.push(<option key={time} value={time}>{time}</option>);
         }
         return options;
