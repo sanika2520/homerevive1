@@ -13,6 +13,7 @@
 //   const [selectedServiceId, setSelectedServiceId] = useState(null); 
 //   const [professionals, setProfessionals] = useState([]); 
 //   const dropdownRef = useRef(null); 
+  
 
 //   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
@@ -207,7 +208,7 @@
 //                 className="book-professional-button" 
 //                 onClick={() => handleBookProfessional(subService)} // Pass sub-service object
 //                 >
-//                 Book Professional
+//                 Find Professional
 //                 </button>
 
 //                 </div>
@@ -239,17 +240,15 @@ import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth and si
 import './CustomerDashboard.css'; 
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 import userProfile from '../assets/user-placeholder.png.webp';
-import {db} from '../firebaseConfig';
-import {collection, addDoc} from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 const CustomerDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [services, setServices] = useState([]); 
   const [selectedServiceId, setSelectedServiceId] = useState(null); 
-  const [professionals, setProfessionals] = useState([]); 
   const dropdownRef = useRef(null); 
   
-
   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   useEffect(() => {
@@ -301,7 +300,7 @@ const CustomerDashboard = () => {
       },
       {
         id: 5,
-        title: 'AC Installation and Repair', // New AC service section
+        title: 'AC Installation and Repair',
         subServices: [
           { id: 22, title: 'AC Installation', description: 'Install new air conditioning units.', price: '₹3500' },
           { id: 23, title: 'AC Repair', description: 'Repair malfunctioning AC units.', price: '₹2000' },
@@ -316,7 +315,7 @@ const CustomerDashboard = () => {
     setSelectedServiceId(serviceId);
   };
 
-  const handleProfileClick = () => {
+  const toggleProfileDropdown = () => {
     setShowDropdown((prev) => !prev);
   };
 
@@ -324,18 +323,6 @@ const CustomerDashboard = () => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
     }
-  };
-
-  const handleHomeClick = () => {
-    navigate('/customer-home'); // Change to the path of your CustomerHome component
-  };
-
-  const toggleProfileDropdown = () => {
-    setShowDropdown((prev) => !prev);
-  };
-
-  const handleLogoutClick = () => {
-    navigate('/'); // Navigate to home on logout
   };
 
   useEffect(() => {
@@ -353,6 +340,8 @@ const CustomerDashboard = () => {
         serviceTitle: services.find(service => service.id === selectedServiceId).title,
         subServiceTitle: subService.title,
         timestamp: new Date(),
+        bookingDate: null, // Placeholder for booking date
+        bookingTime: null, // Placeholder for booking time
       };
 
       await addDoc(collection(db, 'bookings'), bookingData);
@@ -369,18 +358,6 @@ const CustomerDashboard = () => {
     }
   };
 
-
-  const handleLogout = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        navigate('/'); // Redirect to LandingPage after successful logout
-      })
-      .catch((error) => {
-        console.error("Error logging out: ", error);
-      });
-  };
-  
   return (
     <div className="customer-dashboard">
       <header className="header">
@@ -392,7 +369,7 @@ const CustomerDashboard = () => {
           <div className="nav-item" onClick={() => navigate('/customer-home')}>Home</div>
           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
           <div className="profile" onClick={toggleProfileDropdown}>
-          <img src={userProfile} alt="Profile" />
+            <img src={userProfile} alt="Profile" />
             <span className="profile-name">My Profile</span>
           </div>
           {showDropdown && (
@@ -400,7 +377,7 @@ const CustomerDashboard = () => {
               <ul>
                 <li>View Profile</li>
                 <li>Account Settings</li>
-                <li onClick={handleLogoutClick}>Logout</li>
+                <li onClick={() => navigate('/')}>Logout</li>
               </ul>
             </div>
           )}
@@ -435,31 +412,29 @@ const CustomerDashboard = () => {
                 <div className="sub-service-info">
                   <h4>{subService.title}</h4>
                   <p>{subService.description}</p>
-                  <p className="price">Price: {subService.price}</p> {/* Display the price */}
+                  <p className="price">Price: {subService.price}</p>
                 </div>
-                {/* Container for the button to align it properly */}
                 <div className="button-container">
-                <button 
-                className="book-professional-button" 
-                onClick={() => handleBookProfessional(subService)} // Pass sub-service object
-                >
-                Find Professional
-                </button>
-
+                  <button 
+                    className="book-professional-button" 
+                    onClick={() => handleBookProfessional(subService)}
+                  >
+                    Find Professional
+                  </button>
                 </div>
               </div>
             ))}
         </div>
       )}
 
-<footer className="footer">
-            <div className="footer-links">
-                <Link to="/FAQsCustomers">FAQs for Customers</Link>
-                <Link to="/FAQsProviders">FAQs for Providers</Link>
-                <Link to="/terms">Terms of Service</Link>
-                <Link to="/privacy">Privacy Policy</Link>
-            </div>
-            </footer>
+      <footer className="footer">
+        <div className="footer-links">
+          <Link to="/FAQsCustomers">FAQs for Customers</Link>
+          <Link to="/FAQsProviders">FAQs for Providers</Link>
+          <Link to="/terms">Terms of Service</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </div>
+      </footer>
     </div>
   );
 };

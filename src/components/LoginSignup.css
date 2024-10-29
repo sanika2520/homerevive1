@@ -18,6 +18,13 @@ body {
     padding: 20px;
 }
 
+h2 {
+    margin-bottom: 10px;
+    color: #0B1C3E; /* Customize the color */
+    font-size: 2rem; /* Adjust the font size */
+    font-weight: bold; /* Make the text bold */
+}
+
 /* Title */
 h1 {
     margin-bottom: 20px;

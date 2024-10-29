@@ -82,6 +82,7 @@ const ProviderLoginSignup = () => {
 
   return (
     <div className="form-container">
+
       <h1>{isLogin ? "Provider Login" : "Provider Signup"}</h1>
       <form onSubmit={handleSubmit}>
         {!isLogin && (
