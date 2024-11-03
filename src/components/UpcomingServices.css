@@ -1,0 +1,69 @@
+/* src/components/UpcomingServices.css */
+/* Global Settings */
+.upcoming-services {
+  padding: 20px;
+  background-color: #f4f4f4; /* Match the dashboard background */
+  border-radius: 10px; /* Rounded corners for the section */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Title */
+.upcoming-services h2 {
+  font-size: 2.5rem; /* Consistent font size with other headers */
+  color: #0B1C3E; /* Dark blue color for the title */
+  margin-bottom: 20px; /* Space below the title */
+  text-transform: uppercase; /* Uppercase letters */
+}
+
+/* Upcoming Services List */
+.upcoming-services ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Individual Upcoming Service Item */
+.upcoming-services li {
+  margin-bottom: 20px; /* Space between items */
+  padding: 20px; /* Added padding for better spacing */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #ffffff; /* White background for the items */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+  
+}
+
+/* Hover Effect */
+.upcoming-services li:hover {
+  background-color: #e0e0e0; /* Change background on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Service Title */
+.upcoming-services .service-title {
+  font-size: 1.6rem; /* Title size */
+  font-weight: bold; /* Bold weight */
+  color: #0B1C3E; /* Dark blue for the title */
+  margin-bottom: 5px; /* Space below the title */
+}
+
+/* Service Details */
+.upcoming-services .service-detail {
+  margin-bottom: 10px; /* Space below each detail */
+  font-size: 1rem; /* Regular description font size */
+  color:black; /* Medium gray for better contrast */
+  line-height: 1.5; /* Increase line height for better readability */
+}
+
+/* Error Message */
+.upcoming-services .error-message {
+  color: red; /* Red color for error messages */
+  font-size: 1rem; /* Size of the error message */
+  margin-bottom: 15px; /* Space below the error message */
+}
+
+/* No Services Message */
+.upcoming-services .no-services {
+  font-size: 1rem; /* Size for the no services message */
+  color: #666; /* Medium gray for better contrast */
+}

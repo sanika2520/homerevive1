@@ -1,11 +1,11 @@
-// //src/components/ServiceProviderDashboard.js
+// src/components/ServiceProviderDashboard.js
 // import React, { useState, useEffect, useRef } from 'react';
 // import { useNavigate } from 'react-router-dom';
-// import { db, auth } from '../firebaseConfig'; // Import Firebase auth and db
+// import { db, auth } from '../firebaseConfig';
 // import './ServiceProviderDashboard.css';
 // import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 // import userProfile from '../assets/user-placeholder.png.webp';
-// import { doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore'; // Firestore imports
+// import { doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 
 // const ServiceProviderDashboard = () => {
 //   const [showDropdown, setShowDropdown] = useState(false);
@@ -17,23 +17,23 @@
 //   const [showFindButton, setShowFindButton] = useState(false);
 //   const [editWorkingHours, setEditWorkingHours] = useState(false);
 //   const [specificAvailability, setSpecificAvailability] = useState({});
-//   const [selectedDate, setSelectedDate] = useState(''); // Track date for specific availability
+//   const [selectedDate, setSelectedDate] = useState('');
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState('');
 
 //   const dropdownRef = useRef(null);
 //   const navigate = useNavigate();
+//   const providerID = auth.currentUser ? auth.currentUser.uid : null;
 
-//   const providerID = auth.currentUser ? auth.currentUser.uid : null; // Get the logged-in user's provider ID
-
-//   // Default working hours (9:00 AM to 8:00 PM)
 //   const defaultWorkingHours = {
 //     start: '09:00',
 //     end: '20:00',
 //   };
 
-//   // Fetch the account holder's profile details and default availability when the component mounts
 //   useEffect(() => {
 //     if (providerID) {
 //       const fetchAccountHolderDetails = async () => {
+//         setLoading(true);
 //         try {
 //           const providerDocRef = doc(db, 'providers', providerID);
 //           const docSnap = await getDoc(providerDocRef);
@@ -42,44 +42,35 @@
 //             const providerData = docSnap.data();
 //             setAccountHolder(providerData);
 
-//             // Check if the working hours are already set, if not, set default hours
 //             if (!providerData.workingHours) {
-//               // Set default working hours in Firestore
 //               await setDoc(providerDocRef, { workingHours: defaultWorkingHours }, { merge: true });
-//               console.log("Default working hours set.");
 //             }
 //           } else {
-//             console.error('No such document!');
+//             setError('No such document!');
 //           }
 
-//           // Check if the default availability already exists
 //           const availabilityDocRef = doc(db, 'availability', providerID);
 //           const availabilityDocSnap = await getDoc(availabilityDocRef);
 
 //           if (!availabilityDocSnap.exists()) {
-//             // If no availability exists, set the default working hours
-//             await setDoc(availabilityDocRef, {
-//               defaultAvailability: {
-//                 start: '09:00',
-//                 end: '20:00',
-//               }
-//             });
+//             await setDoc(availabilityDocRef, { defaultAvailability: defaultWorkingHours });
 //           }
 //         } catch (error) {
-//           console.error('Error fetching account holder details:', error);
+//           setError('Error fetching account holder details.');
+//         } finally {
+//           setLoading(false);
 //         }
 //       };
 
 //       fetchAccountHolderDetails();
 //     }
-//   }, [providerID]); // Run this useEffect when providerID changes
+//   }, [providerID]);
 
-//   // Dummy services for testing
 //   useEffect(() => {
 //     const dummyServices = [
 //       { id: 1, title: 'Earnings', subServices: [] },
-//       { id: 2, title: 'Past-Work', subServices: [] },
-//       { id: 3, title: 'Upcoming-Work', subServices: [] },
+//       { id: 2, title: 'Past Work', subServices: [] },
+//       { id: 3, title: 'Upcoming Work', subServices: [] },
 //       { id: 4, title: 'New Request', subServices: [] },
 //     ];
 //     setServices(dummyServices);
@@ -98,29 +89,23 @@
 //     try {
 //       const professionalsQuery = query(collection(db, 'providers'));
 //       const querySnapshot = await getDocs(professionalsQuery);
-
 //       const fetchedProfessionals = [];
 //       querySnapshot.forEach((doc) => {
 //         fetchedProfessionals.push(doc.data());
 //       });
-
 //       setProfessionals(fetchedProfessionals);
 //     } catch (error) {
-//       console.error('Error fetching professionals:', error);
+//       setError('Error fetching professionals.');
 //     }
 //   };
 
 //   const handleViewProfile = () => {
-//     setShowProfile(true); // Show account holder's profile
-//     setShowDropdown(false); // Close dropdown after clicking
-//   };
-
-//   const handleEditProfile = () => {
-//     navigate('/provider-login-signup'); // Navigate to LoginSignup.js for editing
+//     setShowProfile(true);
+//     setShowDropdown(false);
 //   };
 
 //   const handleLogoutClick = () => {
-//     navigate('/'); // Navigate to home on logout
+//     navigate('/'); 
 //   };
 
 //   const handleEditWorkingHoursClick = () => {
@@ -128,12 +113,8 @@
 //     setShowDropdown(false);
 //   };
 
-//   // Handle specific availability for a date
 //   const handleSpecificAvailabilityChange = (field, value) => {
-//     setSpecificAvailability((prev) => ({
-//       ...prev,
-//       [field]: value,
-//     }));
+//     setSpecificAvailability((prev) => ({ ...prev, [field]: value }));
 //   };
 
 //   const handleSpecificAvailabilitySubmit = async () => {
@@ -142,22 +123,23 @@
 //       return;
 //     }
 
-//     try {
-//       // Update specific date availability
-//       if (selectedDate) {
-//         const specificAvailabilityRef = doc(db, 'availability', providerID, 'specificDates', selectedDate);
-//         await setDoc(specificAvailabilityRef, { specificAvailability }, { merge: true });
-//         alert('Specific availability updated successfully!');
-//       } else {
-//         alert('Please select a date.');
-//       }
+//     if (!selectedDate) {
+//       alert('Please select a date.');
+//       return;
+//     }
 
+//     try {
+//       const specificAvailabilityRef = doc(db, 'availability', providerID, 'specificDates', selectedDate);
+//       await setDoc(specificAvailabilityRef, { specificAvailability }, { merge: true });
+//       alert('Specific availability updated successfully!');
 //       setEditWorkingHours(false);
 //     } catch (error) {
-//       console.error('Error updating specific availability:', error);
 //       alert('Failed to update specific availability.');
 //     }
 //   };
+
+//   if (loading) return <div>Loading...</div>;
+//   if (error) return <div>{error}</div>;
 
 //   return (
 //     <div className="service-provider-dashboard">
@@ -170,7 +152,7 @@
 //           <div className="nav-item" onClick={() => navigate('/serviceprovider-dashboard')}>Home</div>
 //           <div className="nav-item" onClick={() => navigate('/support')}>Support</div>
 //           <div className="profile" onClick={toggleProfileDropdown}>
-//           <img src={userProfile} alt="Profile" />
+//             <img src={userProfile} alt="Profile" />
 //             <span className="profile-name">My Profile</span>
 //           </div>
 //           {showDropdown && (
@@ -187,7 +169,7 @@
 //       </header>
 
 //       <div className="service-selection-buttons">
-//         <h2>Your Jobs</h2>
+//         <h2>Your Jobs {providerID && ` (User ID: ${providerID}, Pincode: ${accountHolder?.pincode || 'N/A'})`}</h2>
 //         <div className="services-buttons">
 //           {services.map((service) => (
 //             <div key={service.id} className="service-card">
@@ -205,8 +187,6 @@
 //       {editWorkingHours && (
 //         <div className="specific-availability-form">
 //           <h3>Edit Specific Availability for a Date</h3>
-
-//           {/* Date input for specific availability */}
 //           <div className="specific-availability">
 //             <h4>Select Date:</h4>
 //             <input
@@ -227,7 +207,6 @@
 //               onChange={(e) => handleSpecificAvailabilityChange('end', e.target.value)}
 //             />
 //           </div>
-
 //           <button onClick={handleSpecificAvailabilitySubmit} className="submit-button">
 //             Save Availability
 //           </button>
@@ -237,13 +216,11 @@
 //       {selectedServiceId && (
 //         <div className="sub-services-list">
 //           <h3>Available Information:</h3>
-//           {services
-//             .find(service => service.id === selectedServiceId)
-//             .subServices.map(subService => (
-//               <div key={subService.id} className="sub-service-card">
-//                 <h4>{subService.title}</h4>
-//               </div>
-//             ))}
+//           {services.find(service => service.id === selectedServiceId).subServices.map(subService => (
+//             <div key={subService.id} className="sub-service-card">
+//               <h4>{subService.title}</h4>
+//             </div>
+//           ))}
 //         </div>
 //       )}
 
@@ -258,7 +235,8 @@
 //           <h3>Account Holder Details:</h3>
 //           <p>Name: {accountHolder.name}</p>
 //           <p>Email: {accountHolder.email}</p>
-//           <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+//           <p>Pincode: {accountHolder.pincode || 'N/A'}</p>
+//           <button>Edit Profile</button>
 //         </div>
 //       )}
 //     </div>
@@ -268,14 +246,15 @@
 // export default ServiceProviderDashboard;
 
 
+
 // src/components/ServiceProviderDashboard.js
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { db, auth } from '../firebaseConfig';
 import './ServiceProviderDashboard.css';
 import homeReviveLogo from '../assets/home-revive-logo.png.webp';
 import userProfile from '../assets/user-placeholder.png.webp';
-import { doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection, query, getDocs, where } from 'firebase/firestore';
 
 const ServiceProviderDashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -284,9 +263,10 @@ const ServiceProviderDashboard = () => {
   const [services, setServices] = useState([]);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [professionals, setProfessionals] = useState([]);
+  const [upcomingBookings, setUpcomingBookings] = useState([]);
   const [showFindButton, setShowFindButton] = useState(false);
   const [editWorkingHours, setEditWorkingHours] = useState(false);
-  const [specificAvailability, setSpecificAvailability] = useState({});
+  const [specificAvailability, setSpecificAvailability] = useState({ start: '', end: '' });
   const [selectedDate, setSelectedDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -301,10 +281,10 @@ const ServiceProviderDashboard = () => {
   };
 
   useEffect(() => {
-    if (providerID) {
-      const fetchAccountHolderDetails = async () => {
-        setLoading(true);
-        try {
+    const fetchAccountHolderDetails = async () => {
+      setLoading(true);
+      try {
+        if (providerID) {
           const providerDocRef = doc(db, 'providers', providerID);
           const docSnap = await getDoc(providerDocRef);
 
@@ -325,15 +305,15 @@ const ServiceProviderDashboard = () => {
           if (!availabilityDocSnap.exists()) {
             await setDoc(availabilityDocRef, { defaultAvailability: defaultWorkingHours });
           }
-        } catch (error) {
-          setError('Error fetching account holder details.');
-        } finally {
-          setLoading(false);
         }
-      };
+      } catch (error) {
+        setError('Error fetching account holder details.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchAccountHolderDetails();
-    }
+    fetchAccountHolderDetails();
   }, [providerID]);
 
   useEffect(() => {
@@ -341,7 +321,6 @@ const ServiceProviderDashboard = () => {
       { id: 1, title: 'Earnings', subServices: [] },
       { id: 2, title: 'Past Work', subServices: [] },
       { id: 3, title: 'Upcoming Work', subServices: [] },
-      { id: 4, title: 'New Request', subServices: [] },
     ];
     setServices(dummyServices);
   }, []);
@@ -355,17 +334,19 @@ const ServiceProviderDashboard = () => {
     setShowFindButton(true);
   };
 
-  const handleViewJobDetails = async () => {
+  const handleViewUpcomingBookings = async () => {
+    if (!providerID || !accountHolder) return;
+
     try {
-      const professionalsQuery = query(collection(db, 'providers'));
-      const querySnapshot = await getDocs(professionalsQuery);
-      const fetchedProfessionals = [];
+      const bookingsQuery = query(collection(db, 'bookings'), where('providerName', '==', accountHolder.name));
+      const querySnapshot = await getDocs(bookingsQuery);
+      const fetchedBookings = [];
       querySnapshot.forEach((doc) => {
-        fetchedProfessionals.push(doc.data());
+        fetchedBookings.push({ id: doc.id, ...doc.data() });
       });
-      setProfessionals(fetchedProfessionals);
+      setUpcomingBookings(fetchedBookings);
     } catch (error) {
-      setError('Error fetching professionals.');
+      setError('Error fetching upcoming bookings.');
     }
   };
 
@@ -385,6 +366,10 @@ const ServiceProviderDashboard = () => {
 
   const handleSpecificAvailabilityChange = (field, value) => {
     setSpecificAvailability((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleViewBookingDetails = (bookingId) => {
+    navigate(`/bookDetails/${bookingId}`); // Navigate to the bookDetails page with booking ID
   };
 
   const handleSpecificAvailabilitySubmit = async () => {
@@ -439,7 +424,7 @@ const ServiceProviderDashboard = () => {
       </header>
 
       <div className="service-selection-buttons">
-        <h2>Your Jobs {providerID && ` (User ID: ${providerID}, Pincode: ${accountHolder?.pincode || 'N/A'})`}</h2>
+        <h1 align="center">Welcome to Home Revive</h1>
         <div className="services-buttons">
           {services.map((service) => (
             <div key={service.id} className="service-card">
@@ -453,6 +438,32 @@ const ServiceProviderDashboard = () => {
           ))}
         </div>
       </div>
+
+
+      {selectedServiceId === 3 && ( // Assuming "Upcoming Work" is the third service
+        <div className="upcoming-bookings">
+          <h3>Upcoming Bookings:</h3>
+          <button onClick={handleViewUpcomingBookings}>Load Upcoming Bookings</button>
+          {upcomingBookings.length > 0 ? (
+            <ul>
+              {upcomingBookings.map((booking) => (
+                <li key={booking.id}>
+                  <p><strong>Booking ID:</strong> {booking.id}</p>
+                  <p><strong>Date:</strong> {booking.bookingDate}</p>
+                  <p><strong>Time:</strong> {booking.bookingTime}</p>
+                  <p><strong>Service:</strong> {booking.serviceTitle}</p>
+                  <p><strong>Sub Service:</strong> {booking.subServiceTitle}</p>
+                  <button onClick={() => handleViewBookingDetails(booking.id)}>View Booking Details</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp; 
+                  <button>Mark as done</button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No upcoming bookings found.</p>
+          )}
+        </div>
+      )}
 
       {editWorkingHours && (
         <div className="specific-availability-form">
@@ -483,23 +494,6 @@ const ServiceProviderDashboard = () => {
         </div>
       )}
 
-      {selectedServiceId && (
-        <div className="sub-services-list">
-          <h3>Available Information:</h3>
-          {services.find(service => service.id === selectedServiceId).subServices.map(subService => (
-            <div key={subService.id} className="sub-service-card">
-              <h4>{subService.title}</h4>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {showFindButton && (
-        <div className="View Details">
-          <button onClick={handleViewJobDetails} className="View-Details">View Details</button>
-        </div>
-      )}
-
       {showProfile && accountHolder && (
         <div className="profile-details">
           <h3>Account Holder Details:</h3>
@@ -509,6 +503,13 @@ const ServiceProviderDashboard = () => {
           <button>Edit Profile</button>
         </div>
       )}
+
+      <footer className="footer">
+        <div className="footer-links">
+          <Link to="/FAQsCustomers">FAQs for Customers</Link>
+          <Link to="/FAQsProviders">FAQs for Providers</Link>
+        </div>
+      </footer>
     </div>
   );
 };
